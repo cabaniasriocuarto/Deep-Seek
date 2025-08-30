@@ -1,4 +1,4 @@
-`css
+css
 /*
  * General styles for the Apart Cabañas Río Cuarto site.
  * This stylesheet defines a dark theme with warm accent colors, responsive
@@ -87,31 +87,18 @@ header nav .nav-links li.social a.instagram { color: #c13584; }
   font-size: 1.5rem;
   cursor: pointer;
 }
-/* Hero section con picture element */
+/* Hero section */
 .hero {
-  position: relative;
-  min-height: 70vh;
   display: flex;
-  align-items: flex-end;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  min-height: 70vh;
+  padding: 0.5rem;
+  background-image: url("images/portada.jpg");
+  background-size: cover;
+  background-position: center;
   text-align: center;
-  overflow: hidden;
-}
-.hero-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1;
-}
-.hero-content {
-  background: rgba(0, 0, 0, 0.5);
-  padding: 2rem;
-  width: 100%;
-  max-width: 900px;
-  margin-bottom: 2rem;
 }
 .hero h1 {
   font-size: 2.5rem;
@@ -119,32 +106,21 @@ header nav .nav-links li.social a.instagram { color: #c13584; }
   color: #FFC107;
   text-shadow: 
     -1px -1px 0 #000,  
-    1px -1px 0 #000,  
-    -1px 1px 0 #000,  
-    1px 1px 0 #000;
+     1px -1px 0 #000,  
+    -1px  1px 0 #000,  
+     1px  1px 0 #000;
 }
 .hero p {
   font-size: 1.2rem;
-  color: white;
+  max-width: 870px;
+  color: black;
   margin-bottom: 1rem;
   font-weight: bold;
   text-shadow: 
-    -1px -1px 0 #000,  
-    1px -1px 0 #000,  
-    -1px 1px 0 #000,  
-    1px 1px 0 #000;
-}
-/* Para navegadores que no soportan picture */
-@supports not (display: grid) {
-  .hero {
-    background-image: url("images/portada.jpg");
-    background-size: cover;
-    background-position: center;
-  }
-  
-  .hero-bg {
-    display: none;
-  }
+    -1px -1px 0 white,
+     1px -1px 0 white,
+    -1px  1px 0 white,
+     1px  1px 0 white;
 }
 /* Tarifas Section */
 .tarifas {
@@ -228,7 +204,7 @@ header nav .nav-links li.social a.instagram { color: #c13584; }
 .tarifa-card .btn {
   align-self: center;
 }
-/* Check-in / Check-out info */
+/* Check‑in / Check‑out info */
 .check-info {
   margin-top: 2rem;
   text-align: center;
