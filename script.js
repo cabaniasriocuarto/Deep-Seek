@@ -1,9 +1,9 @@
-javascript
 /*
  * Simple slider and lightbox functionality for the gallery section.
  * This script handles previous/next navigation through the gallery slides
  * and opens an overlay when an image is clicked to view it enlarged.
  */
+
 document.addEventListener('DOMContentLoaded', () => {
   const slidesContainer = document.querySelector('.slides');
   const images = document.querySelectorAll('.slides img');
@@ -14,8 +14,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const lightboxClose = document.querySelector('.lightbox .close');
   const navToggle = document.querySelector('.nav-toggle');
   const navLinks = document.querySelector('.nav-links');
+
   let currentIndex = 0;
   const totalSlides = images.length;
+
   // Mobile menu toggle
   if (navToggle && navLinks) {
     navToggle.addEventListener('click', () => {
@@ -30,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
   /**
    * Update the transform on the slides container to show the given index.
    * Uses modulo arithmetic to wrap around at either end.
@@ -45,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
     slidesContainer.style.transform = `translateX(-${index * 100}%)`;
     currentIndex = index;
   }
+
   // Event listeners for navigation buttons
   if (prevButton) {
     prevButton.addEventListener('click', () => {
@@ -56,6 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
       showSlide(currentIndex + 1);
     });
   }
+
   // Open the lightbox when any image is clicked
   images.forEach((img) => {
     img.addEventListener('click', () => {
@@ -64,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.body.style.overflow = 'hidden'; // Prevent scrolling when lightbox is open
     });
   });
+
   // Close the lightbox when the close icon is clicked
   if (lightboxClose) {
     lightboxClose.addEventListener('click', () => {
@@ -71,6 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.body.style.overflow = 'auto'; // Re-enable scrolling
     });
   }
+
   // Also close the lightbox when clicking outside the image
   if (lightbox) {
     lightbox.addEventListener('click', (event) => {
@@ -80,6 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
   // Event tracking for WhatsApp floating button
   const whatsappFloat = document.querySelector('.whatsapp-float');
   if (whatsappFloat) {
@@ -97,6 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
   // Event tracking for WhatsApp button on the contact page
   const contactWhatsapp = document.querySelector('.contact-form .social-button.whatsapp');
   if (contactWhatsapp) {
@@ -112,6 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
   // Event tracking for form submission on the contact page
   const contactForm = document.querySelector('.contact-form form');
   if (contactForm) {
@@ -138,46 +148,85 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
-// Insertar imágenes de la carpeta galeria automáticamente
+
+// Insertar imágenes de la carpeta images automáticamente
 document.addEventListener("DOMContentLoaded", () => {
   const slidesContainer = document.querySelector(".slides");
   if (slidesContainer) {
-    // Mantener el video como primer elemento
-    const video = slidesContainer.querySelector('video');
-    if (video) {
-      // Clonar el video y limpiar el contenedor
-      const videoClone = video.cloneNode(true);
-      slidesContainer.innerHTML = '';
-      slidesContainer.appendChild(videoClone);
-    } else {
-      slidesContainer.innerHTML = '';
-    }
-    const supportedExt = ["webp", "jpg", "jpeg", "png"];
+    // Lista de imágenes para la galería basada en los nombres proporcionados
+    const imageNames = [
+      "quincho", "patio_nevado", "Virgen_de_Lurdes", "pileta_fuera", "pileta", "patio", 
+      "apar_nevado", "portada", "habitación", "cochera", "cocina", "hermosa", "cama1_2", 
+      "individuales", "Hermosa2", "calle", "asador", "calle2", "Recepción", "automovil", 
+      "promo", "asadora", "pileta_quincho", "mesa_de_ping_pong", "Entrada_de_cabañas"
+    ];
+    
+    const supportedExt = ["webp", "jpg", "jpeg"];
     let imagesFound = 0;
     
-    for (let i = 1; i <= 50; i++) {
-      let imageLoaded = false;
-      
+    // Función para agregar una imagen a la galería
+    function addImageToGallery(name) {
       for (let ext of supportedExt) {
-        const img = document.createElement("img");
-        img.src = `galeria/foto${i}.${ext}`;
-        img.alt = `Foto ${i}`;
+        const img = new Image();
+        img.src = `images/${name}.${ext}`;
+        img.alt = name.replace(/_/g, ' ');
+        
         img.onload = function() {
-          if (!imageLoaded) {
-            imageLoaded = true;
-            imagesFound++;
+          // Solo agregar si no se ha agregado ya esta imagen
+          if (!document.querySelector(`.slides img[src="${img.src}"]`)) {
             slidesContainer.appendChild(img);
+            imagesFound++;
+            // Reiniciar el slider después de agregar imágenes
+            initSlider();
           }
-        };
-        img.onerror = function() {
-          // No hacer nada si la imagen no existe
         };
       }
     }
     
+    // Agregar todas las imágenes
+    imageNames.forEach(name => {
+      addImageToGallery(name);
+    });
+    
     // Si no se encontraron imágenes, mostrar un mensaje
-    if (imagesFound === 0) {
-      console.warn("No se encontraron imágenes en la galería. Asegúrate de que existan en la carpeta 'galeria/' con el formato 'foto1.jpg', 'foto2.jpg', etc.");
-    }
+    setTimeout(() => {
+      if (imagesFound === 0) {
+        console.warn("No se encontraron imágenes en la galería. Asegúrate de que existan en la carpeta 'images/'");
+      }
+    }, 1000);
   }
 });
+
+// Inicializar el slider después de cargar las imágenes
+function initSlider() {
+  const slidesContainer = document.querySelector('.slides');
+  const images = document.querySelectorAll('.slides img, .slides video');
+  const prevButton = document.querySelector('.slider .prev');
+  const nextButton = document.querySelector('.slider .next');
+  
+  let currentIndex = 0;
+  const totalSlides = images.length;
+  
+  function showSlide(index) {
+    if (index < 0) {
+      index = totalSlides - 1;
+    }
+    if (index >= totalSlides) {
+      index = 0;
+    }
+    slidesContainer.style.transform = `translateX(-${index * 100}%)`;
+    currentIndex = index;
+  }
+  
+  // Event listeners for navigation buttons
+  if (prevButton) {
+    prevButton.addEventListener('click', () => {
+      showSlide(currentIndex - 1);
+    });
+  }
+  if (nextButton) {
+    nextButton.addEventListener('click', () => {
+      showSlide(currentIndex + 1);
+    });
+  }
+}
