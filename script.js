@@ -1,9 +1,9 @@
+javascript
 /*
  * Simple slider and lightbox functionality for the gallery section.
  * This script handles previous/next navigation through the gallery slides
  * and opens an overlay when an image is clicked to view it enlarged.
  */
-
 document.addEventListener('DOMContentLoaded', () => {
   const slidesContainer = document.querySelector('.slides');
   const images = document.querySelectorAll('.slides img');
@@ -12,10 +12,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightbox-img');
   const lightboxClose = document.querySelector('.lightbox .close');
-
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
   let currentIndex = 0;
   const totalSlides = images.length;
-
+  // Mobile menu toggle
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+    
+    // Close menu when clicking on a link
+    const navItems = navLinks.querySelectorAll('a');
+    navItems.forEach(item => {
+      item.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+      });
+    });
+  }
   /**
    * Update the transform on the slides container to show the given index.
    * Uses modulo arithmetic to wrap around at either end.
@@ -31,7 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
     slidesContainer.style.transform = `translateX(-${index * 100}%)`;
     currentIndex = index;
   }
-
   // Event listeners for navigation buttons
   if (prevButton) {
     prevButton.addEventListener('click', () => {
@@ -43,31 +56,30 @@ document.addEventListener('DOMContentLoaded', () => {
       showSlide(currentIndex + 1);
     });
   }
-
   // Open the lightbox when any image is clicked
   images.forEach((img) => {
     img.addEventListener('click', () => {
       lightboxImg.src = img.src;
       lightbox.style.display = 'flex';
+      document.body.style.overflow = 'hidden'; // Prevent scrolling when lightbox is open
     });
   });
-
   // Close the lightbox when the close icon is clicked
   if (lightboxClose) {
     lightboxClose.addEventListener('click', () => {
       lightbox.style.display = 'none';
+      document.body.style.overflow = 'auto'; // Re-enable scrolling
     });
   }
-
   // Also close the lightbox when clicking outside the image
   if (lightbox) {
     lightbox.addEventListener('click', (event) => {
       if (event.target === lightbox) {
         lightbox.style.display = 'none';
+        document.body.style.overflow = 'auto'; // Re-enable scrolling
       }
     });
   }
-
   // Event tracking for WhatsApp floating button
   const whatsappFloat = document.querySelector('.whatsapp-float');
   if (whatsappFloat) {
@@ -85,7 +97,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
-
   // Event tracking for WhatsApp button on the contact page
   const contactWhatsapp = document.querySelector('.contact-form .social-button.whatsapp');
   if (contactWhatsapp) {
@@ -101,7 +112,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
-
   // Event tracking for form submission on the contact page
   const contactForm = document.querySelector('.contact-form form');
   if (contactForm) {
@@ -113,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
           'event_category': 'Interacción',
           'event_label': 'Formulario de contacto'
         });
-        // Disparar un evento de conversión genérico que pueda asociarse a Google Ads/Analytics
+        // Disparar un evento de conversión genérico que pueda asociarse a Google Ads/Analytics
         gtag('event', 'conversion', {
           'send_to': 'G-1ZEE3XF0SP',
           'event_category': 'Formulario',
@@ -122,25 +132,56 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       if (window.dataLayer) {
         window.dataLayer.push({ event: 'enviar_formulario' });
-        // También enviar un evento de conversión al DataLayer para Tag Manager
+        // También enviar un evento de conversión al DataLayer para Tag Manager
         window.dataLayer.push({ event: 'conversion' });
       }
     });
   }
 });
+// Función para comprobar soporte de WebP
+function checkWebPSupport(callback) {
+  var webP = new Image();
+  webP.onload = webP.onerror = function() {
+    callback(webP.height === 2);
+  };
+  webP.src = 'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA';
+}
 // Insertar imágenes de la carpeta galeria automáticamente
 document.addEventListener("DOMContentLoaded", () => {
   const slidesContainer = document.querySelector(".slides");
-  if (slidesContainer) {
-    const supportedExt = ["jpg","jpeg","webp"];
-    for (let i=1; i<=50; i++) {  // hasta 50 fotos posibles
-      for (let ext of supportedExt) {
+  
+  checkWebPSupport(function(isSupported) {
+    if (slidesContainer) {
+      const preferredExt = isSupported ? "webp" : "jpg";
+      const fallbackExt = isSupported ? "jpg" : "webp";
+      let imagesFound = 0;
+      
+      for (let i = 1; i <= 50; i++) {
         const img = document.createElement("img");
-        img.src = `galeria/foto${i}.${ext}`;
+        
+        // Primero intentar con la extensión preferida
+        img.src = `galeria/foto${i}.${preferredExt}`;
         img.alt = `Foto ${i}`;
-        img.onerror = () => { img.remove(); };
-        slidesContainer.appendChild(img);
+        
+        img.onload = function() {
+          imagesFound++;
+          slidesContainer.appendChild(img);
+        };
+        
+        img.onerror = function() {
+          // Si falla, intentar con la extensión alternativa
+          img.src = `galeria/foto${i}.${fallbackExt}`;
+          img.onerror = function() {
+            // Si ambas extensiones fallan, no añadir la imagen
+            console.warn(`Imagen galeria/foto${i} no encontrada`);
+          };
+        };
+      }
+      
+      // Si no se encontraron imágenes, mostrar un mensaje
+      if (imagesFound === 0) {
+        console.warn("No se encontraron imágenes en la galería.");
       }
     }
-  }
+  });
 });
