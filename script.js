@@ -1,4 +1,4 @@
-`javascript
+javascript
 /*
  * Simple slider and lightbox functionality for the gallery section.
  * This script handles previous/next navigation through the gallery slides
@@ -142,7 +142,17 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener("DOMContentLoaded", () => {
   const slidesContainer = document.querySelector(".slides");
   if (slidesContainer) {
-    const supportedExt = ["jpg", "jpeg", "webp", "png"];
+    // Mantener el video como primer elemento
+    const video = slidesContainer.querySelector('video');
+    if (video) {
+      // Clonar el video y limpiar el contenedor
+      const videoClone = video.cloneNode(true);
+      slidesContainer.innerHTML = '';
+      slidesContainer.appendChild(videoClone);
+    } else {
+      slidesContainer.innerHTML = '';
+    }
+    const supportedExt = ["webp", "jpg", "jpeg", "png"];
     let imagesFound = 0;
     
     for (let i = 1; i <= 50; i++) {
@@ -152,14 +162,14 @@ document.addEventListener("DOMContentLoaded", () => {
         const img = document.createElement("img");
         img.src = `galeria/foto${i}.${ext}`;
         img.alt = `Foto ${i}`;
-        img.onload = () => {
+        img.onload = function() {
           if (!imageLoaded) {
             imageLoaded = true;
             imagesFound++;
             slidesContainer.appendChild(img);
           }
         };
-        img.onerror = () => {
+        img.onerror = function() {
           // No hacer nada si la imagen no existe
         };
       }
