@@ -50,8 +50,8 @@
   <meta property="og:description" content="Complejo de 17 cabañas equipadas en Río Cuarto. Alojamiento con piscina, cochera y quincho. Reservá tu hotel, apart o cabaña en Río Cuarto." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="images/tarifa.jpeg" />
-  <meta property="og:url" content="https://www.apartcabaniasriocuarto.com/index.html" />
-  <link rel="canonical" href="https://www.apartcabaniasriocuarto.com/index.html" />
+  <meta property="og:url" content="https://www.ejemplo.com/index.html" />
+  <link rel="canonical" href="https://www.ejemplo.com/index.html" />
   <!-- Site Styles -->
   <link rel="stylesheet" href="styles.css">
   <!-- Structured data JSON‑LD for a lodging business -->
@@ -61,7 +61,7 @@
     "@type": "LodgingBusiness",
     "name": "Apart Cabañas Río Cuarto",
     "description": "Complejo de 17 cabañas equipadas en Río Cuarto. Alojamiento con piscina, cochera y quincho.",
-    "url": "https://www.apartcabaniasriocuarto.com/",
+    "url": "https://www.ejemplo.com/",
     "telephone": "+54 358 465 0416",
     "priceRange": "$$",
     "address": {
@@ -107,14 +107,17 @@
         <img src="images/logo-cabanias.jpg" alt="Apart Cabañas Río Cuarto" class="logo-img">
         <span>Apart Cabañas Río Cuarto</span>
       </a>
+      
       <button class="nav-toggle" aria-label="Abrir menú">
         <i class="fas fa-bars"></i>
       </button>
+      
       <ul class="nav-links">
         <li><a href="#tarifas">Tarifas</a></li>
         <li><a href="#servicios">Servicios</a></li>
         <li><a href="#galeria">Galería</a></li>
         <li><a href="contacto.html">Reservas / Contacto</a></li>
+        <!-- Social icons in the navigation -->
         <li class="social"><a href="https://www.facebook.com/apartcabaniasriocuarto/" class="facebook" aria-label="Facebook" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a></li>
         <li class="social"><a href="https://www.instagram.com/apartcabaniasriocuarto/" class="instagram" aria-label="Instagram" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a></li>
       </ul>
@@ -123,11 +126,9 @@
   <main>
     <!-- Hero section welcoming visitors -->
     <section id="hero" class="hero">
-      <div class="hero-content">
-        <h1>Bienvenidos a Apart Cabañas Río Cuarto</h1>
-        <p>Complejo de 17 cabañas totalmente equipadas para el confort de sus huéspedes.
-          Reservá directo, sin comisiones.</p>
-      </div>
+      <h1>Bienvenidos a Apart Cabañas Río Cuarto</h1>
+      <p>Complejo de 17 cabañas totalmente equipadas para el confort de sus huéspedes.
+        Reservá directo, sin comisiones.</p>
     </section>
     <!-- Tarifas section with cards arranged responsively -->
     <section id="tarifas" class="tarifas">
@@ -137,29 +138,44 @@
       <div class="tarifas-scroll-container">
         <div class="tarifas-grid">
           <div class="tarifa-card">
-            <img src="images/1-plaza.jpg" alt="Cabaña 2 personas" class="tarifa-img">
+            <picture>
+              <source srcset="images/1-plaza.webp" type="image/webp">
+              <source srcset="images/1-plaza.jpg" type="image/jpeg">
+              <img src="images/1-plaza.jpg" alt="Cabaña 2 personas" class="tarifa-img">
+            </picture>
             <h3>Cabaña 2 Personas</h3>
             <p>1 cama matrimonial<br>o<br>2 individuales</p>
             <p class="precio">Desde $65.000</p>
-            <!-- Todos los botones de reserva llevan a WhatsApp con un mensaje predefinido -->
             <a href="https://wa.me/543584650416?text=Hola%2C%20me%20comunico%20desde%20la%20p%C3%A1gina%20para%20solicitar%20m%C3%A1s%20informaci%C3%B3n%20sobre%20las%20caba%C3%B1as" class="btn" target="_blank" rel="noopener">Reservar</a>
           </div>
           <div class="tarifa-card">
-            <img src="images/cabaña-1-2.jpg" alt="Cabaña 3 personas" class="tarifa-img">
+            <picture>
+              <source srcset="images/cabaña1-2.webp" type="image/webp">
+              <source srcset="images/cabaña1-2.jpg" type="image/jpeg">
+              <img src="images/cabaña1-2.jpg" alt="Cabaña 3 personas" class="tarifa-img">
+            </picture>
             <h3>Cabaña 3 Personas</h3>
             <p>1 matrimonial + 1 individual<br>o<br>3 individuales</p>
             <p class="precio">Desde $75.000</p>
             <a href="https://wa.me/543584650416?text=Hola%2C%20me%20comunico%20desde%20la%20p%C3%A1gina%20para%20solicitar%20m%C3%A1s%20informaci%C3%B3n%20sobre%20las%20caba%C3%B1as" class="btn" target="_blank" rel="noopener">Reservar</a>
           </div>
           <div class="tarifa-card">
-            <img src="images/cabaña-1-2.jpg" alt="Cabaña 4 personas" class="tarifa-img">
+            <picture>
+              <source srcset="images/cabaña1-2.webp" type="image/webp">
+              <source srcset="images/cabaña1-2.jpg" type="image/jpeg">
+              <img src="images/cabaña1-2.jpg" alt="Cabaña 4 personas" class="tarifa-img">
+            </picture>
             <h3>Cabaña 4 Personas</h3>
             <p>1 matrimonial + 2 individuales<br>o<br>4 individuales</p>
             <p class="precio">Desde $85.000</p>
             <a href="https://wa.me/543584650416?text=Hola%2C%20me%20comunico%20desde%20la%20p%C3%A1gina%20para%20solicitar%20m%C3%A1s%20informaci%C3%B3n%20sobre%20las%20caba%C3%B1as" class="btn" target="_blank" rel="noopener">Reservar</a>
           </div>
           <div class="tarifa-card">
-            <img src="images/cabaña-1-2.jpg" alt="Cabaña 5 personas" class="tarifa-img">
+            <picture>
+              <source srcset="images/cabaña1-2.webp" type="image/webp">
+              <source srcset="images/cabaña1-2.jpg" type="image/jpeg">
+              <img src="images/cabaña1-2.jpg" alt="Cabaña 5 personas" class="tarifa-img">
+            </picture>
             <h3>Cabaña 5 Personas</h3>
             <p>1 matrimonial + 3 individuales<br>o<br>5 individuales</p>
             <p class="precio">Desde $95.000</p>
@@ -215,7 +231,8 @@
           <i class="fas fa-chevron-left"></i>
         </button>
         <div class="slides">
-          <!-- Las imágenes se insertarán automáticamente con JavaScript -->
+          <video src="video/videoplayback.mp4" controls muted autoplay loop></video>
+          <!-- Las imágenes se insertarán automáticamente aquí con JavaScript -->
         </div>
         <button class="next" aria-label="Imagen siguiente">
           <i class="fas fa-chevron-right"></i>
