@@ -1,4 +1,4 @@
-javascript
+`javascript
 /*
  * Simple slider and lightbox functionality for the gallery section.
  * This script handles previous/next navigation through the gallery slides
@@ -138,50 +138,36 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
-// Función para comprobar soporte de WebP
-function checkWebPSupport(callback) {
-  var webP = new Image();
-  webP.onload = webP.onerror = function() {
-    callback(webP.height === 2);
-  };
-  webP.src = 'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA';
-}
 // Insertar imágenes de la carpeta galeria automáticamente
 document.addEventListener("DOMContentLoaded", () => {
   const slidesContainer = document.querySelector(".slides");
-  
-  checkWebPSupport(function(isSupported) {
-    if (slidesContainer) {
-      const preferredExt = isSupported ? "webp" : "jpg";
-      const fallbackExt = isSupported ? "jpg" : "webp";
-      let imagesFound = 0;
+  if (slidesContainer) {
+    const supportedExt = ["jpg", "jpeg", "webp", "png"];
+    let imagesFound = 0;
+    
+    for (let i = 1; i <= 50; i++) {
+      let imageLoaded = false;
       
-      for (let i = 1; i <= 50; i++) {
+      for (let ext of supportedExt) {
         const img = document.createElement("img");
-        
-        // Primero intentar con la extensión preferida
-        img.src = `galeria/foto${i}.${preferredExt}`;
+        img.src = `galeria/foto${i}.${ext}`;
         img.alt = `Foto ${i}`;
-        
-        img.onload = function() {
-          imagesFound++;
-          slidesContainer.appendChild(img);
+        img.onload = () => {
+          if (!imageLoaded) {
+            imageLoaded = true;
+            imagesFound++;
+            slidesContainer.appendChild(img);
+          }
         };
-        
-        img.onerror = function() {
-          // Si falla, intentar con la extensión alternativa
-          img.src = `galeria/foto${i}.${fallbackExt}`;
-          img.onerror = function() {
-            // Si ambas extensiones fallan, no añadir la imagen
-            console.warn(`Imagen galeria/foto${i} no encontrada`);
-          };
+        img.onerror = () => {
+          // No hacer nada si la imagen no existe
         };
-      }
-      
-      // Si no se encontraron imágenes, mostrar un mensaje
-      if (imagesFound === 0) {
-        console.warn("No se encontraron imágenes en la galería.");
       }
     }
-  });
+    
+    // Si no se encontraron imágenes, mostrar un mensaje
+    if (imagesFound === 0) {
+      console.warn("No se encontraron imágenes en la galería. Asegúrate de que existan en la carpeta 'galeria/' con el formato 'foto1.jpg', 'foto2.jpg', etc.");
+    }
+  }
 });
