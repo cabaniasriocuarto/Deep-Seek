@@ -35,8 +35,6 @@
   </script>
   <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=908743106466719&ev=PageView&noscript=1"/></noscript>
   <!-- End Meta Pixel Code -->
-  <!-- Preload critical images -->
-  <link rel="preload" href="images/logo-cabanias.webp" as="image">
   <!-- SEO meta tags -->
   <meta name="description" content="Contactanos para reservar tu cabaña en Río Cuarto. Complejo de 17 cabañas equipadas, con piscina, cochera, quincho y más.">
   <meta name="keywords" content="alojamiento en Río Cuarto, hospedaje en Río Cuarto, cabañas en Río Cuarto, apart hotel en Río Cuarto, apart en Río Cuarto, hoteles en Río Cuarto, hostel en Río Cuarto, hoteles en RíoCuarto, reservas cabañas Río Cuarto, apart hotel Río Cuarto">
@@ -46,7 +44,7 @@
   <meta property="og:title" content="Reservas | Apart Cabañas Río Cuarto" />
   <meta property="og:description" content="Contactanos para reservar tu cabaña en Río Cuarto. Complejo de 17 cabañas equipadas." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="images/tarifa.webp" />
+  <meta property="og:image" content="images/tarifa.jpeg" />
   <meta property="og:url" content="https://www.apartcabaniasriocuarto.com/contacto.html" />
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -74,11 +72,7 @@
   <header>
     <nav>
       <a href="index.html" class="logo">
-        <picture>
-          <source srcset="images/logo-cabanias.webp" type="image/webp">
-          <source srcset="images/logo-cabanias.jpg" type="image/jpeg">
-          <img src="images/logo-cabanias.jpg" alt="Apart Cabañas Río Cuarto" class="logo-img">
-        </picture>
+        <img src="images/logo-cabanias.jpg" alt="Apart Cabañas Río Cuarto" class="logo-img">
         <span>Apart Cabañas Río Cuarto</span>
       </a>
       <button class="nav-toggle" aria-label="Abrir menú">
@@ -89,7 +83,6 @@
         <li><a href="index.html#servicios">Servicios</a></li>
         <li><a href="index.html#galeria">Galería</a></li>
         <li><a href="contacto.html" class="active">Reservas / Contacto</a></li>
-        <!-- Social icons in the navigation -->
         <li class="social"><a href="https://www.facebook.com/apartcabaniasriocuarto/" class="facebook" aria-label="Facebook" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a></li>
         <li class="social"><a href="https://www.instagram.com/apartcabaniasriocuarto/" class="instagram" aria-label="Instagram" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a></li>
       </ul>
@@ -101,7 +94,10 @@
       <p class="descripcion">Consultá disponibilidad y tarifas. Respondemos a la brevedad.</p>
       <div class="contacto-container">
         <div class="contact-form">
-          <form action="https://formspree.io/f/mjvnzzwz" method="post">
+          <form action="https://formsubmit.co/cabaniasriocuarto@gmail.com" method="POST">
+            <input type="hidden" name="_subject" value="Nuevo mensaje desde el sitio web">
+            <input type="hidden" name="_next" value="https://www.apartcabaniasriocuarto.com/gracias.html">
+            <input type="hidden" name="_captcha" value="false">
             <div class="social-buttons" style="justify-content:center;">
               <a href="https://wa.me/543584650416?text=Hola%2C%20me%20comunico%20desde%20la%20p%C3%A1gina%20para%20solicitar%20m%C3%A1s%20informaci%C3%B3n%20sobre%20las%20caba%C3%B1as" class="social-button whatsapp" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i><span>WhatsApp</span></a>
               <a href="https://www.facebook.com/apartcabaniasriocuarto/" class="social-button facebook" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i><span>Facebook</span></a>
@@ -109,15 +105,15 @@
             </div>
             <div class="input-group">
               <label for="nombre">Nombre</label>
-              <input type="text" id="nombre" name="nombre" required>
+              <input type="text" id="nombre" name="name" required>
             </div>
             <div class="input-group">
-              <label for="email">E-mail</label>
+              <label for="email">E‑mail</label>
               <input type="email" id="email" name="email" required>
             </div>
             <div class="input-group">
               <label for="mensaje">Mensaje</label>
-              <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+              <textarea id="mensaje" name="message" rows="5" required></textarea>
             </div>
             <button type="submit" class="btn">Enviar</button>
           </form>
@@ -140,11 +136,7 @@
     <div class="footer-container">
       <div class="footer-left">
         <div class="footer-logo-container">
-          <picture>
-            <source srcset="images/logo-cabanias.webp" type="image/webp">
-            <source srcset="images/logo-cabanias.jpg" type="image/jpeg">
-            <img src="images/logo-cabanias.jpg" alt="Logo Apart Cabañas Río Cuarto" class="footer-logo-img">
-          </picture>
+          <img src="images/logo-cabanias.jpg" alt="Logo Apart Cabañas Río Cuarto" class="footer-logo-img">
           <span>Apart Cabañas Río Cuarto</span>
         </div>
         <h4>Ubicación</h4>
